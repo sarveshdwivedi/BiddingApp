@@ -42,7 +42,10 @@ export default function reducer(state = initialState, action) {
         switch (attribute.Name) {
           case 'name':
             loadedObject.firstName = attribute.Value;
-            break;          
+            break;
+          case 'family_name':
+            loadedObject.lastName = attribute.Value;
+            break;
           case 'email':
             loadedObject.emailAddress = attribute.Value;
             break;
@@ -52,6 +55,7 @@ export default function reducer(state = initialState, action) {
           case 'username':
             loadedObject.username = attribute.Value;
             break;
+          
           default:
             break;
         }
@@ -65,7 +69,6 @@ export default function reducer(state = initialState, action) {
         lastName: loadedObject.lastName,
         emailAddress: loadedObject.emailAddress,
         emailAddressVerified: loadedObject.emailAddressVerified,
-        
         loginRedirect: undefined,
         loginError: undefined
       }
@@ -100,7 +103,9 @@ export default function reducer(state = initialState, action) {
             case 'name':
               loadedObject.firstName = attribute.Value;
               break;
-            
+            case 'family_name':
+              loadedObject.lastName = attribute.Value;
+              break;
             case 'email':
               loadedObject.emailAddress = attribute.Value;
               break;
@@ -109,7 +114,7 @@ export default function reducer(state = initialState, action) {
               break;
             case 'username':
               loadedObject.username = attribute.Value;
-              break;
+              break;            
             default:
               break;
           }
@@ -123,7 +128,7 @@ export default function reducer(state = initialState, action) {
           firstName: loadedObject.firstName,
           lastName: loadedObject.lastName,
           emailAddress: loadedObject.emailAddress,
-          emailAddressVerified: loadedObject
+          emailAddressVerified: loadedObject.emailAddressVerified
         }
       } else {
         return {

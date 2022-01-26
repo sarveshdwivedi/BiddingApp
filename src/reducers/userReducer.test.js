@@ -94,7 +94,7 @@ const user_current_fulfilled_loaded_action = {
     }, {
         Name: 'email',
         Value: testUserEmail
-    }, ]
+    }]
 };
 const user_current_fulfilled_notFound_action = { type: 'USER_CURRENT_FULFILLED' };
 const user_current_rejected_action = { type: 'USER_CURRENT_REJECTED', payload: testError };
