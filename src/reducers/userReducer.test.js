@@ -66,7 +66,10 @@ const user_login_fulfilled_action = {
     }, {
         Name: 'name',
         Value: testFirstName
-    },  {
+    }, {
+        Name: 'family_name',
+        Value: testLastName
+    }, {
         Name: 'email',
         Value: testUserEmail
     }]
@@ -85,7 +88,10 @@ const user_current_fulfilled_loaded_action = {
     }, {
         Name: 'name',
         Value: testFirstName
-    }, , {
+    }, {
+        Name: 'family_name',
+        Value: testLastName
+    }, {
         Name: 'email',
         Value: testUserEmail
     }, ]

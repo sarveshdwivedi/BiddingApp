@@ -3,24 +3,30 @@ import testProduct from './productReducer';
 
 describe('Test Users reducer tests', () => {
     const state = {
-        userList: [{
-                id: 1,
-                name: 'John',
-                username: 'johney',
-                email: 'john@yopmail.com'
-            },
-            {
-                id: 2,
-                name: 'Marsh',
-                username: 'marshy',
-                email: 'marsh@yopmail.com'
-            },
-            {
-                id: 3,
-                name: 'Ricky',
-                username: 'rick',
-                email: 'rick@yopmail.com'
-            },
+        productList: [{
+            "productId": "6",
+            "productName": "abc",
+            "shortDescription": "abvps",
+            "category": "PAINTING",
+            "startingPrice": "1",
+            "bidEndDate": "23-01-2022"
+          },
+          {
+            "productId": "7",
+            "productName": "abc",
+            "shortDescription": "abvps",
+            "category": "PAINTING",
+            "startingPrice": "1",
+            "bidEndDate": "23-01-2022"
+          },
+          {
+            "productId": "4",
+            "productName": "abc",
+            "shortDescription": "abvps",
+            "category": "PAINTING",
+            "startingPrice": "1",
+            "bidEndDate": "23-01-2022"
+          }
         ]
     }
 
