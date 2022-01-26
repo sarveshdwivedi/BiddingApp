@@ -1,4 +1,4 @@
-# BiddingApp Frontend Project
+# OrderAnywhere Frontend Project
 This is Product & Bid system frontend application that uses the backend Services & Database to Add, Edit, Delete and Listing of product along with Place and Update Bid.
 
 ## Prerequisites
