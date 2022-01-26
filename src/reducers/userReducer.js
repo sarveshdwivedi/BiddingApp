@@ -36,9 +36,7 @@ export default function reducer(state = initialState, action) {
         firstName: '',
         lastName: '',
         emailAddress: '',
-        emailAddressVerified: false,
-        phoneNumber: '',
-        groups: []
+        emailAddressVerified: false
       }
       action.payload.forEach(function (attribute) {
         switch (attribute.Name) {
@@ -102,9 +100,7 @@ export default function reducer(state = initialState, action) {
             case 'name':
               loadedObject.firstName = attribute.Value;
               break;
-            case 'family_name':
-              loadedObject.lastName = attribute.Value;
-              break;
+            
             case 'email':
               loadedObject.emailAddress = attribute.Value;
               break;
