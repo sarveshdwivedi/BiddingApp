@@ -1,0 +1,32 @@
+{
+  "response": {
+    "msg": "PRODUCT RETRIEVED",
+    "statusCode": 200
+  },
+  "products": [
+    {
+      "productId": "6",
+      "productName": "abc",
+      "shortDescription": "abvps",
+      "category": "PAINTING",
+      "startingPrice": "1",
+      "bidEndDate": "23-01-2022"
+    },
+    {
+      "productId": "7",
+      "productName": "abc",
+      "shortDescription": "abvps",
+      "category": "PAINTING",
+      "startingPrice": "1",
+      "bidEndDate": "23-01-2022"
+    },
+    {
+      "productId": "4",
+      "productName": "abc",
+      "shortDescription": "abvps",
+      "category": "PAINTING",
+      "startingPrice": "1",
+      "bidEndDate": "23-01-2022"
+    }
+  ]
+}
