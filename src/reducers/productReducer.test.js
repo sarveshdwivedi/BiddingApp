@@ -1,5 +1,5 @@
 import deepFreeze from 'deep-freeze';
-import testProduct from './testProductReducer';
+import testProduct from './productReducer';
 
 describe('Test Users reducer tests', () => {
     const state = {
@@ -27,7 +27,7 @@ describe('Test Users reducer tests', () => {
     describe('GET_PRODUCTS TESTS', () => {
         const action = {
             type: 'GET_PRODUCT',
-            userList: state.productList
+            productList: state.productList
         };
         it('Should return all products', () => {
             expect(state.productList.length).toEqual(3);
@@ -43,15 +43,6 @@ describe('Test Users reducer tests', () => {
             expect(state.productList.length).toEqual(3);
         });
 
-        it('Should return a state object without the deleted product', () => {        
-            const newState = testProduct(state, action);
-            testProduct(state, action);
-            expect(newState.productList.indexOf({
-                id: 1,
-                name: 'John',
-                username: 'johney',
-                email: 'john@yopmail.com'
-            })).toEqual(-1);
-        });
+        
     });
 });
