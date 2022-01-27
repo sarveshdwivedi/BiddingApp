@@ -3,52 +3,44 @@ let url;
 /*
  * action creators for get product list
  */
-const baseURL = "http://ec2-52-14-87-162.us-east-2.compute.amazonaws.com:8091/";
+const baseURL = "http://localhost:8965/api/v1/";
 //const baseURL = "http://ec2-3-23-63-5.us-east-2.compute.amazonaws.com:8965/";
 
 export function getProducts(userType, searchEmail) {
 
   if (userType === 'seller') {
-    url = baseURL + userType + "/products/" + searchEmail
+    url = baseURL +  "seller/products/" + searchEmail
   } else {
-    url = baseURL + userType + "/products"
+    url = baseURL +  "seller/products"
   }
 
-  // let data = {
-  //   "response": {
+  //  let data = {
+  //    "response": {
   //     "msg": "PRODUCT RETRIEVED",
-  //     "statusCode": 200
-  //   },
-  //   "products": [
-  //     {
-  //       "productId": "6",
-  //       "productName": "abc",
-  //       "shortDescription": "abvps",
-  //       "category": "PAINTING",
-  //       "startingPrice": "1",
-  //       "bidEndDate": "23-01-2022"
-  //     },
-  //     {
-  //       "productId": "7",
-  //       "productName": "abc",
-  //       "shortDescription": "abvps",
-  //       "category": "PAINTING",
-  //       "startingPrice": "1",
-  //       "bidEndDate": "23-01-2022"
-  //     },
-  //     {
-  //       "productId": "4",
-  //       "productName": "abc",
-  //       "shortDescription": "abvps",
-  //       "category": "PAINTING",
-  //       "startingPrice": "1",
-  //       "bidEndDate": "23-01-2022"
-  //     }
-  //   ]
-  //}
+  //      "statusCode": 200
+  //    },
+  //    "products": [
+  //      {
+  //        "productId": "6",
+  //        "productName": "abc",
+  //        "shortDescription": "abvps",
+  //        "category": "PAINTING",
+  //        "startingPrice": "1",
+  //        "bidEndDate": "23-01-2022"
+  //      },
+  //      {
+  //        "productId": "7",
+  //        "productName": "abc",
+  //        "shortDescription": "abvps",
+  //        "category": "PAINTING",
+  //        "startingPrice": "1",
+  //        "bidEndDate": "23-01-2022"
+  //      }
+  //    ]
+  // }
 
   return function (dispatch, getState) {
-    // return dispatch({ type: 'GET_PRODUCTS', productList: data.products });
+    //return dispatch({ type: 'GET_PRODUCTS', productList: data.products });
 
     axios.get(url, {
       headers: {
