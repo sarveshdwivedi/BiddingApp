@@ -13,3 +13,14 @@
     margin-left: 0;
     margin-right: 0;
 }
+
+.toast-error{
+    position: relative;
+    width: 18.75rem;
+    padding: 15px 15px 15px 50px;
+    margin: 16px 6Px 6px;
+    overflow: hidden;
+    color: #fff;
+    background-color: #ff3547 !important;
+    float: right;
+  }
