@@ -1,6 +1,6 @@
 import React from 'react';
 import FontIcon from 'material-ui/FontIcon';
-// import RaisedButton from 'material-ui/RaisedButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router';
 
 import {
@@ -35,7 +35,7 @@ const iconStylesEdit = {
  * Product List Populate here 
  */
 
-const ProductListTable = ({ productList, currentBidData, handleEditProduct, handleDeleteProduct, handleProductDetails }) => (
+const ProductListTable = ({ productList, currentBidData, handleEditProduct, handleDeleteProduct, handleProductDetails, handleShowBid }) => (
   <Table selectable={false}>
     <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
       <TableRow>
@@ -43,8 +43,7 @@ const ProductListTable = ({ productList, currentBidData, handleEditProduct, hand
         <TableHeaderColumn>Description</TableHeaderColumn>
         <TableHeaderColumn>Category</TableHeaderColumn>
         <TableHeaderColumn>Starting Price</TableHeaderColumn>
-        <TableHeaderColumn>Bid End Date</TableHeaderColumn>
-        <TableHeaderColumn>Current Bid</TableHeaderColumn>
+        <TableHeaderColumn>Bid End Date</TableHeaderColumn>       
         {(localStorage.getItem('userType') === 'seller') ?
           <TableHeaderColumn>Actions</TableHeaderColumn>
           : null}
@@ -59,13 +58,12 @@ const ProductListTable = ({ productList, currentBidData, handleEditProduct, hand
           <TableRowColumn>{row.category}</TableRowColumn>
           <TableRowColumn>{row.startingPrice}</TableRowColumn>
           <TableRowColumn>{row.bidEndDate}</TableRowColumn>
-          <TableRowColumn>{
-            currentBidData.filter(currentBid => currentBid.productId === row.productId).map(bid => (bid ?
-              '$' + bid.bidAmount : 'NA'))}</TableRowColumn>
+          
           {(localStorage.getItem('userType') === 'seller') ?
             <TableRowColumn>
               <FontIcon className="material-icons" style={iconStylesEdit} onClick={() => { handleEditProduct(index) }}>edit</FontIcon>
               <FontIcon className="material-icons" style={iconStylesDelete} onClick={() => { handleDeleteProduct(row.productId) }}>delete</FontIcon>
+              <RaisedButton label="Show Bids" primary={true} onClick={() => { handleShowBid(row.productId) }} />
             </TableRowColumn>
             : null}
         </TableRow>

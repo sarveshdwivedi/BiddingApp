@@ -7,13 +7,14 @@ const customContentStyle = {
   width: '50%',
   maxWidth: 'none',
 };
-let currentBid;
+let productBid;
 /*
  * Details Product modal dialogue
  */
-const ProductDetails = ({ currentBidData, handleBidProduct, handleUpdateBid, productObj, productName, shortDescription, category, startingPrice, bidEndDate, openModal, cancelModal, getValues }) => (
-  currentBid = currentBidData.filter(currentBid => currentBid.productId === productObj.productId && currentBid.email === localStorage.getItem('searchEmail')),
-
+const ProductDetails = ({ productBidList, currentBidData, handleBidProduct, handleUpdateBid, productObj, productName, shortDescription, category, startingPrice, bidEndDate, openModal, cancelModal, getValues }) => (
+  //currentBid = currentBidData.filter(currentBid => currentBid.productId === productObj.productId && currentBid.email === localStorage.getItem('searchEmail')),
+  productBid = productBidList.filter(productBid => productBid.productId === productObj.productId && productBid.email === localStorage.getItem('searchEmail')),
+  
   <Dialog
     title="Product Details"
     actions={[
@@ -23,7 +24,7 @@ const ProductDetails = ({ currentBidData, handleBidProduct, handleUpdateBid, pro
         onClick={cancelModal}
       />,
       (localStorage.getItem('userType') === 'buyer') ?
-        currentBid.length > 0 ?
+      productBid.length > 0 ?
           <RaisedButton label="Update Bid" primary={true} onClick={() => { handleUpdateBid(productObj.productId) }} />
           :
           <RaisedButton label="Bid Now" primary={true} onClick={() => { handleBidProduct(productObj.productId) }} />
@@ -84,7 +85,7 @@ const ProductDetails = ({ currentBidData, handleBidProduct, handleUpdateBid, pro
           <p class="margin-10px-left">Current Bid:</p>
         </div>
         <div class="col-md-8 col-lg-8">
-          <p> {currentBidData.filter(currentBid => currentBid.productId === productObj.productId).map(bid => (bid ?
+          <p> {productBid.filter(productBid => productBid.productId === productObj.productId).map(bid => (bid ?
             '$' + bid.bidAmount : 'NA'))}</p>
         </div>
       </div>

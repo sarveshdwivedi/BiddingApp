@@ -11,7 +11,7 @@ const customContentStyle = {
 /*
  * Edit Product modal dialogue
  */
-const BidUpdate = ({ productName, bidAmount, openModal, cancelModal, bidUpdate, getValues }) => (
+const BidUpdate = ({ openModal, productName, bidAmount, bidUpdate, cancelModal, getValues }) => (
   <Dialog
     title="Update Bid"
     actions={[

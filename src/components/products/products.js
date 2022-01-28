@@ -7,6 +7,7 @@ import AddProduct from './addProductModal';
 import EditProduct from './editProductModal';
 import BidProduct from './bidProductModal';
 import BidUpdate from './bidUpdateModal';
+import ShowBids from './productBidList';
 import ProductDetails from './productDetailsModal';
 import ProductSearch from './ProductSearch';
 import * as actions from '../../actions/product.action';
@@ -61,14 +62,14 @@ class Products extends React.Component {
     //   }
 
     handleSearchChange = (e) => {
-        let searchEmail = this.state.searchEmail ? this.state.searchEmail : 'a4444@a4444.com'
+        let searchEmail = this.state.searchEmail ? this.state.searchEmail : null
         let userType = e.target.value ? e.target.value : 'seller'
 
         localStorage.setItem('userType', userType)
         localStorage.setItem('searchEmail', searchEmail)
 
         this.setState({
-            userType : userType
+            userType: userType
         })
 
         this.props.productActions.getProducts(userType, searchEmail);
@@ -89,6 +90,8 @@ class Products extends React.Component {
             open: true,
             productDTS: true
         })
+
+        this.props.productActions.showBids(currentProductData.productId);
     }
 
     handleAddProduct() {
@@ -100,17 +103,22 @@ class Products extends React.Component {
 
     handleBidProduct(productId) {
         let currentProductData = this.props.productList.filter(currentData => currentData.productId === productId);
-        let currentBidData = this.props.currentBidData.filter(currentBid => currentBid.productId === currentProductData.productId);
+        let currentBidData = this.props.productBidList.filter(productBid => productBid.productId === currentProductData.productId && productBid.email === localStorage.getItem('searchEmail'));
 
         this.setState({
             productName: currentProductData[0].productName,
-            bidAmount: currentBidData.length > 0 ? currentBidData[0].currentBid : '$00.00',
+            bidAmount: currentBidData.length > 0 ? currentBidData[0].bidAmount : '$00.00',
             maxBid: '',
             productId: currentProductData[0].productId,
             open: true,
             bidFrm: true,
             productDTS: false
         })
+    }
+
+    handleShowBid(productId) {
+        this.props.productActions.showBids(productId);
+        this.setState({ open: true, showbidsFrm: true })
     }
 
     handleEditProduct(index) {
@@ -131,7 +139,7 @@ class Products extends React.Component {
 
     handleUpdateBid(productId) {
         let currentProductData = this.props.productList.filter(currentData => currentData.productId === productId);
-        let currentBidData = this.props.currentBidData.filter(currentBid => currentBid.productId === productId);
+        let currentBidData = this.props.productBidList.filter(productBid => productBid.productId === currentProductData.productId && productBid.email === localStorage.getItem('searchEmail'));
 
         this.setState({
             productName: currentProductData[0].productName,
@@ -143,7 +151,7 @@ class Products extends React.Component {
         })
     }
 
-        handleDeleteProduct(id) {
+    handleDeleteProduct(id) {
         this.props.productActions.deleteProduct(id);
     }
 
@@ -220,7 +228,7 @@ class Products extends React.Component {
     }
 
     cancelModal() {
-        this.setState({ open: false, addFrm: false, editFrm: false, bidFrm: false, editBidFrm: false, productDTS: false })
+        this.setState({ open: false, addFrm: false, editFrm: false, bidFrm: false, editBidFrm: false, productDTS: false, showbidsFrm: false })
     }
 
 
@@ -234,10 +242,10 @@ class Products extends React.Component {
                 <ProductSearch handleSearchChange={this.handleSearchChange.bind(this)} getValues={this.getValues.bind(this)} />
 
                 {this.props.productList ? this.props.productList.length > 0 ?
-                    <ProductListTable productList={this.props.productList} currentBidData={this.props.currentBidData} handleEditProduct={this.handleEditProduct.bind(this)} handleDeleteProduct={this.handleDeleteProduct.bind(this)} handleProductDetails={this.handleProductDetails.bind(this)} />
+                    <ProductListTable productList={this.props.productList} currentBidData={this.props.currentBidData} handleEditProduct={this.handleEditProduct.bind(this)} handleDeleteProduct={this.handleDeleteProduct.bind(this)} handleProductDetails={this.handleProductDetails.bind(this)} handleShowBid={this.handleShowBid.bind(this)} />
                     : null : null}
 
-                <ProductDetails currentBidData={this.props.currentBidData} handleBidProduct={this.handleBidProduct.bind(this)} handleUpdateBid={this.handleUpdateBid.bind(this)}
+                <ProductDetails  productBidList={this.props.productBidList} currentBidData={this.props.currentBidData} handleBidProduct={this.handleBidProduct.bind(this)} handleUpdateBid={this.handleUpdateBid.bind(this)}
                     productObj={this.state.prdObj}
                     productName={this.state.productName}
                     shortDescription={this.state.shortDescription}
@@ -270,10 +278,15 @@ class Products extends React.Component {
                     cancelModal={this.cancelModal.bind(this)} />
 
                 <BidUpdate openModal={this.state.open && this.state.editBidFrm}
-                    getValues={this.getValues.bind(this)}
                     productName={this.state.productName}
                     bidAmount={this.state.bidAmount}
                     bidUpdate={this.bidUpdate.bind(this)}
+                    getValues={this.getValues.bind(this)}
+                    cancelModal={this.cancelModal.bind(this)}
+                />
+
+                <ShowBids openModal={this.state.open && this.state.showbidsFrm}
+                    productBidList={this.props.productBidList}
                     cancelModal={this.cancelModal.bind(this)} />
             </div>
         )
@@ -285,8 +298,8 @@ class Products extends React.Component {
 function mapStateToProps(state, ownProps) {
     return {
         currentBidData: state.productReducer.currentBidData,
-        productList: state.productReducer.productList
-
+        productList: state.productReducer.productList,
+        productBidList: state.productReducer.productBidList
     };
 }
 
